@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<!-- 	<script th:src="@{/static/js/test.js}"></script> --> <!-- 引入js文件 需要在后端资源文件配置thymeleaf引入静态文件  -->
+<body>
+<p th:text="${u.name}"></p>
+<p th:text="${u.age}"></p>
+<p th:text="${u.url}"></p>
+<p th:text="${u.desc}"></p>
+<p th:utext="${u.desc}"></p>
+
+
+
+<div th:object="${u}">
+ <p th:text="*{name}"></p>
+<p th:text="*{age}"></p>
+<p th:text="*{url}"></p>
+<p th:text="*{desc}"></p>
+<p th:utext="*{desc}"></p>
+
+</div>
+<form th:action="@{saveUser}" method="post" th:object="${u}" th:method="post">
+ <input type="text" th:field="*{name}"/>
+ <input type="text" th:field="*{age}"/>
+ <input type="text" th:field="*{url}"/>
+ <input type="text" th:field="*{desc}"/>
+  <input type="submit"/>
+</form>
+<select>
+     <option >选择框</option>
+     <option th:selected="${u.name eq 'lee'}">lee</option> <!-- eq是等于的意思 -->
+     <option th:selected="${u.name eq 'heng'}">heng</option>
+     <option th:selected="${u.name eq 'LeeCX'}">LeeCX</option>
+</select>
+<table>
+    <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>年龄备注</th>
+<!--         <th>生日</th>-->
+     </tr>
+    <tr th:each="person:${list}">
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.age}"></td>
+        <td th:text="${person.age gt 18} ? 你成熟了 : 你还年轻">18岁</td>
+       <!--  <td th:text="${#dates.format(user.birthday, 'yyyy-MM-dd hh:mm:ss')}"></td> -->
+    </tr>
+</table>
+<br/>
+
+<br/>
+<div th:switch="${u.name}">
+  <p th:case="'lee'">lee</p>
+  <p th:case="#{roles.manager}">普通管理员</p> <!-- #{roles.superadmin} 可以这样那静态文件是引入了i18n静态文件 -->
+  <p th:case="#{roles.superadmin}">超级管理员</p>
+  <p th:case="*">其他用户</p>
+</div>
+<br/>
+
+</body>
+</html>
