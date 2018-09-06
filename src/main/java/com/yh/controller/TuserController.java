@@ -52,6 +52,17 @@ public class TuserController {
 		System.out.println(list.size());
 	return	list;
 	}
+	/**
+	 * 测试mapper查询
+	 * <p>Title: saveTuser</p>  
+	 * <p>Description: </p>
+	 */
+	@RequestMapping("findTusers")
+	@ResponseBody
+	public List<TUser> findTusers() {
+		List<TUser> list = tuserService.findTusers();
+		return	list;
+	}
 	
 	/**
 	 * 分页查询

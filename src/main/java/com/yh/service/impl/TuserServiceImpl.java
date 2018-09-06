@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.yh.mapper.TUserMapper;
+import com.yh.mapper.userMapper;
 import com.yh.pojo.TUser;
 import com.yh.service.TuserService;
 
@@ -19,6 +20,9 @@ public class TuserServiceImpl implements TuserService {
 	
 	@Autowired
 	private TUserMapper tuserMapper;
+	
+	@Autowired
+	private userMapper userMapper;
 	
 	/**
 	 * 增加
@@ -74,7 +78,7 @@ public class TuserServiceImpl implements TuserService {
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public List<TUser> findTusers() {
 		// TODO Auto-generated method stub
-		return tuserMapper.selectAll();
+		return userMapper.findListTuser();
 	}
 	/**
 	 * 分页查询
